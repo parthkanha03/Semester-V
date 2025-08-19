@@ -1,0 +1,71 @@
+Encrytion : 
+ openssl enc -aes-256-cbc -salt -in message.txt -out message.enc
+
+Decryption : 
+ openssl enc -d -aes-256-cbc -in message.enc -out decrypted_message.txt
+
+diff message.txt decrypted_message.txt
+
+
+
+
+Encryption in ecb mode :
+openssl enc -des-ecb -in message.txt -out message.des.enc
+
+Decryption in ecb mode:
+openssl enc -d -des-ecb -in message.des.enc -out decrypted_message.txt
+
+diff message.txt decrypted_message.txt
+
+
+. Encrypt message.txt using RC4:
+openssl enc -rc4 -in message.txt -out message.rc4.enc
+
+. Decrypt with RC4:
+openssl enc -d -rc4 -in message.rc4.enc -out decrypted_message_rc4.txt
+
+
+. Compare Ciphertext Sizes:
+ls -l message.rc4.enc message.enc message.des.enc
+
+->RC4 output size ≈ plaintext size (with a few bytes of OpenSSL header)
+->AES/DES output size is often larger due to block size and padding.
+
+. Compare Ciphertext Readability:
+head -c 32 message.rc4.enc | xxd
+head -c 32 message.enc | xxd
+head -c 32 message.des.enc | xxd
+
+
+Summary Table
+Cipher	Output Size	Readability	Notes
+RC4	≈ plaintext	Not human-readable	Stream cipher, minimal expansion
+AES-CBC	> plaintext	Not human-readable	Block cipher, padding & salt header
+DES-ECB	> plaintext	Not human-readable	Block cipher, padding & salt header
+
+
+
+
+-----------------------------------------------------
+Generate DSA parameters (2048-bit p, 256-bit q):
+
+>> openssl genpkey -genparam -algorithm DSA \
+  -pkeyopt dsa_paramgen_bits:2048 \
+  -pkeyopt dsa_paramgen_q_bits:256 \
+  -out dsa_params.pem
+
+Generate private key from parameters:
+
+>>openssl genpkey -paramfile dsa_params.pem -out dsa_private.pem
+
+Extract public key:
+
+>>openssl pkey -in dsa_private.pem -pubout -out dsa_public.pem
+
+Sign message.txt with the DSA private key (using SHA-256)
+
+>>openssl dgst -sha256 -sign dsa_private.pem -out message.sig message.txt
+
+Verify the signature with the DSA public key
+
+>>openssl dgst -sha256 -verify dsa_public.pem -signature message.sig message.txt
