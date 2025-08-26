@@ -1,1 +1,161 @@
-ASSIGNEMNSTS 
+RSA ka full form hai **Rivest–Shamir–Adleman** ✅
+(yeh in teen inventors ke naam par rakha gaya hai: **Ron Rivest, Adi Shamir, aur Leonard Adleman**, 1977).
+
+Yeh ek **asymmetric encryption algorithm** hai, jo sabse zyada famous aur widely used public-key cryptosystem hai.
+
+---
+
+⚡ **Key Features of RSA:**
+
+* **Type:** Asymmetric (ek **public key** aur ek **private key** use hoti hai).
+* **Mathematics:** Large **prime numbers** aur **modular arithmetic** par based hai.
+* **Security:** RSA ki security depend karti hai **large prime factorization problem** ki difficulty par (bade number ko prime factors me todhna extremely hard hai).
+
+---
+
+🔑 **Kaise kaam karta hai (simplified):**
+
+1. **Key Generation:**
+
+   * Do bade prime numbers choose karo (p aur q).
+   * Compute $n = p \times q$.
+   * Compute Euler’s totient: $\varphi(n) = (p-1)(q-1)$.
+   * Choose $e$ (public exponent), jo $\varphi(n)$ ke sath coprime ho.
+   * Compute $d$ (private exponent) such that $e \times d \equiv 1 \pmod{\varphi(n)}$.
+   * **Public key = (e, n)**, **Private key = (d, n)**
+
+2. **Encryption:**
+
+   * Ciphertext = $M^e \mod n$
+   * (yahan M = plaintext message, numeric form me)
+
+3. **Decryption:**
+
+   * Plaintext = $C^d \mod n$
+   * (yahan C = ciphertext)
+
+---
+
+🛡 **Strengths of RSA:**
+
+* Public–private key concept (digital signatures, authentication).
+* Widely used in **SSL/TLS (HTTPS websites), digital certificates, email encryption (PGP/GPG), secure payments**.
+
+🛑 **Weakness:**
+
+* Slow compared to symmetric algorithms (AES).
+* Large key sizes (2048-bit, 4096-bit) required for security.
+* Quantum computers ke aane ke baad RSA vulnerable ho sakta hai (Shor’s algorithm se).
+
+---
+
+👉 Bhai, chaho to main tumhe ek **numerical toy example** (chhote primes ke sath step by step encryption–decryption) bana kar samjha dun?
+
+
+
+AES ka full form hai **Advanced Encryption Standard** ✅
+
+🔒 Ye ek **symmetric encryption algorithm** hai jo data ko secure karne ke liye use hota hai.
+Matlab **encrypt** (data ko unreadable form me convert karna) aur **decrypt** (wapis original me laana) dono kaam ek hi secret key se hote hain.
+
+---
+
+⚡ **Key points about AES:**
+
+* **Developed by:** Joan Daemen aur Vincent Rijmen (Belgian cryptographers).
+* **Adopted by:** U.S. government in 2001 (FIPS standard).
+* **Key sizes:** 128-bit, 192-bit, aur 256-bit.
+* **Block size:** Fixed 128-bit blocks par kaam karta hai.
+* **Use cases:** Secure messaging apps (WhatsApp, Signal), VPNs, Wi-Fi security (WPA2/WPA3), online banking, etc.
+
+---
+
+🛡 AES isko itna secure banata hai ki aaj ke time me **worldwide standard** mana jata hai aur governments, banks, companies sab use karte hain.
+
+---
+
+Kya mai tumhe **AES ka simple working example (plaintext → ciphertext)** bana kar dikhau?
+
+
+DES ka full form hai **Data Encryption Standard** ✅
+
+🔒 Ye ek **symmetric-key encryption algorithm** tha jo 1970s–90s ke beech data security ka standard tha, lekin aaj ke time me outdated aur insecure mana jata hai.
+
+---
+
+⚡ **Key Points about DES:**
+
+* **Developed by:** IBM (early 1970s), later adopted by U.S. government in 1977 as a standard (FIPS PUB 46).
+* **Block size:** 64-bit (data ko 64-bit blocks me tod kar encrypt karta hai).
+* **Key size:** 56-bit (jisme se 8 bits parity ke liye hote hain).
+* **Method:** Feistel network ka use karta hai (16 rounds of substitution & permutation).
+* **Type:** Symmetric encryption (ek hi key se encrypt aur decrypt).
+
+---
+
+🛑 **Why DES is insecure today?**
+
+* 56-bit key bohot chhoti hai → brute force attack se easily break ho sakti hai.
+* 1998 me EFF (Electronic Frontier Foundation) ne ek machine banayi jo **DES ko 56 hours me tod diya**.
+* Aaj ke supercomputers aur botnets isse seconds/minutes me crack kar sakte hain.
+
+---
+
+🛡 **Replacements of DES:**
+
+* **3DES (Triple DES):** DES ko 3 baar alag keys ke sath apply karke security badhayi gayi, lekin ye bhi aaj kal slow aur weak mana jata hai.
+* **AES (Advanced Encryption Standard):** Ab **worldwide standard** hai aur DES ka successor hai.
+
+---
+
+👉 Chaho to main tumhe ek **DES vs AES comparison table** bana ke dikhata hoon, taaki difference crystal clear ho jaye.
+Kya bana du?
+
+
+RC4 ka full form hai **Rivest Cipher 4** ✅
+Isse 1987 me **Ronald Rivest** ne design kiya tha, aur yeh ek **stream cipher** hai (block cipher nahi).
+
+---
+
+⚡ **Key Features of RC4:**
+
+* **Type:** Symmetric stream cipher
+* **Key size:** 40 to 2048 bits
+* **Operation:** Ek **keystream** generate karta hai, jise plaintext ke sath XOR karke ciphertext banta hai. (Decryption bhi wahi hota hai → ciphertext ⊕ keystream = plaintext)
+* **Speed:** Bohot fast aur simple (software me efficient).
+* **Use cases:** SSL/TLS (pahle use hota tha), WEP & WPA (Wi-Fi security), Microsoft Office encryption, etc.
+
+---
+
+🔎 **Working of RC4 (simplified):**
+
+1. **Key Scheduling Algorithm (KSA):**
+
+   * Secret key se permutation array `S[0..255]` initialize hota hai.
+
+2. **Pseudo-Random Generation Algorithm (PRGA):**
+
+   * `S` se pseudo-random keystream bytes generate hote hain.
+
+3. **Encryption/Decryption:**
+
+   * Plaintext byte ⊕ Keystream byte = Ciphertext
+   * (Symmetric hai → same process se decrypt hota hai).
+
+---
+
+🛑 **Weaknesses of RC4:**
+
+* Statistical biases in keystream → attacker patterns nikal sakta hai.
+* WEP (Wi-Fi encryption) RC4 ki wajah se insecure ho gaya tha → crack karna aasaan tha.
+* 2015 ke baad se SSL/TLS me RC4 ko **officially banned** kar diya gaya (IETF & major browsers).
+
+---
+
+🛡 **Today:**
+RC4 ab **deprecated (unsafe)** mana jata hai, aur uski jagah **AES** aur modern stream ciphers (ChaCha20, Salsa20) use kiye jate hain.
+
+---
+
+👉 Kya tum chahte ho ki main tumhe ek **RC4 ke XOR working ka chhota numeric example** bana kar samjhau (plaintext → ciphertext → plaintext)?
+ 
