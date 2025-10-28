@@ -1,0 +1,26 @@
+>> sudo tcpdump
+That's a powerful combination\! You're asking for the `tcpdump` command to:
+
+1.  Specify the **Interface** (`-i`).
+2.  Filter by **Protocol** (e.g., `icmp`).
+3.  Use the **Verbose** flag (`-v`).
+4.  Specifically **Capture ICMP packets**.
+
+Here is the command you are looking for:
+
+```bash
+sudo tcpdump -i <interface_name> -v icmp
+```
+
+### **Command Breakdown:**
+
+| Component | Flag/Keyword | Description |
+| :--- | :--- | :--- |
+| **Elevated Permissions** | `sudo` | Required to capture packets. |
+| **Interface Flag** | `-i <interface_name>` | Specifies which network interface to listen on (e.g., `eth0` or `wlan0`). |
+| **Verbose Flag** | `-v` | Increases the level of detail in the output. Use `-vv` or `-vvv` for even more detail\! |
+| **Protocol Filter** | `icmp` | Restricts the capture to only Internet Control Message Protocol packets (like ping requests/replies). |
+
+-----
+
+Would you like to know how to filter for other common protocols like **TCP** or **UDP**?
